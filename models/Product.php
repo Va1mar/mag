@@ -220,8 +220,11 @@ class Product {
         
         $imagePath = '/upload/images/'.$id.'.jpg';
         
-        if(file_exists($imagePath))
+        if(file_exists($_SERVER['DOCUMENT_ROOT'].$imagePath)) {
+
             return $imagePath;
+        }
+            
         return '/upload/images/default.png';
     }
     
