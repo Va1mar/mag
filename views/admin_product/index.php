@@ -23,7 +23,7 @@
                     <form method="post">
                         
                         <select name="category_name" style="margin-bottom: 10px;">
-                            <option disabled selected>Все</option>
+                            <option value="all">Все</option>
                             <?php foreach($categories as $category): ?>
                                 <option value="<?php echo $category['id']?>">
                                     <?php echo $category['name']; ?>

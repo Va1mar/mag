@@ -12,9 +12,13 @@ class AdminProductController extends AdminBase {
         $categories = Category::getCategoriesList();
         
         if(isset($_POST['sort'])) {
-            $location = 'Location: /admin/product/category/'.$_POST['category_name'];
-//            echo $location;
-            header($location);
+            if($_POST['category_name'] == 'all')
+                header('Location: /admin/product');
+            else {
+                $location = 'Location: /admin/product/category/'.$_POST['category_name'];
+                header($location);
+            }
+            
         }
         
         require_once ROOT.'/views/admin_product/index.php';
@@ -26,8 +30,12 @@ class AdminProductController extends AdminBase {
         
         
         if(isset($_POST['sort'])) {
-            $location = 'Location: /admin/product/category/'.$_POST['category_name'];
-            header($location);
+            if($_POST['category_name'] == 'all')
+                header('Location: /admin/product');
+            else {
+                $location = 'Location: /admin/product/category/'.$_POST['category_name'];
+                header($location);
+            }
         }
         
         require_once ROOT.'/views/admin_product/category.php';
@@ -60,12 +68,19 @@ class AdminProductController extends AdminBase {
             $options['is_new'] = $_POST['is_new'];
             $options['status'] = $_POST['status'];
             
+            
+            $filename = $_FILES['image']['tmp_name'];
+            
+            if(!Utility::is_image($filename))
+                $errors[] = 'Неверно выбрано изображение';
+                
             if(!$errors) {
                 $id = Product::createProduct($options);
                 
                 if($id) {
-                    if(is_uploaded_file($_FILES['image']['tmp_name'])) {
-                        move_uploaded_file($_FILES['image']['tmp_name'], ROOT.'/upload/images/'.$id.'.jpg');
+                    
+                    if(is_uploaded_file($filename)) {
+                        move_uploaded_file($filename, ROOT.'/upload/images/'.$id.'.jpg');
                 }
                 
 
@@ -101,6 +116,11 @@ class AdminProductController extends AdminBase {
             $options['is_new'] = $_POST['is_new'];
             $options['status'] = $_POST['status'];
             $options['id'] = $id;
+            
+            $filename = $_FILES['image']['tmp_name'];
+            
+            if(!Utility::is_image($filename))
+                $errors[] = 'Неверно выбрано изображение';
             
             if(!$errors) {
                 

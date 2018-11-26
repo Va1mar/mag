@@ -29,8 +29,11 @@ $category_name = Category::getCategoryNameById($category_id);
                     <form method="post">
                         
                         <select name="category_name" style="margin-bottom: 10px;">
+                            <option value="all">Все</option>
                             <?php foreach($categories as $category): ?>
-                                <option value="<?php echo $category['id']?>">
+                                <option value="<?php echo $category['id']?>" 
+                                        <?php if($category_id == $category['id']) echo 'selected'; ?> 
+                                        >
                                     <?php echo $category['name']; ?>
                                 </option>
                             <?php endforeach; ?>

@@ -12,7 +12,6 @@ session_start();
 
 // Подключение файлов
 define('ROOT', dirname(__FILE__));
-//require_once ROOT.'/components/Autoload.php';
 
 spl_autoload_register(function($class_name) {
     $paths = array(

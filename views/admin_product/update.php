@@ -20,7 +20,7 @@
             <?php if($errors && is_array($errors)): ?>
                 <ul>
                     <?php foreach($errors as $error): ?>
-                        <li>- $error</li>
+                        <li>- <?php echo $error; ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
@@ -73,7 +73,7 @@
                         
                         <p>
                             Выбрать изображение: 
-                            <input type="file" name="image" value="<?php Product::getImage($product['id']) ?>">
+                            <input type="file" name="image" value="">
                         </p>
                         
                         <p>
